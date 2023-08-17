@@ -138,6 +138,10 @@ export const Task2Page = (props) => {
             const newAnswer = [...prevAnswer];
             newAnswer[i] = [...newAnswer[i]];
             newAnswer[i][j] = val;
+
+            // clear sub question answer
+            if (j==0) newAnswer[i][1] = "";
+            
             return newAnswer;
         });
     }
@@ -160,8 +164,7 @@ export const Task2Page = (props) => {
                     {currentPageNum === 9 ?
                         <>
                             <div className='explaination'>
-                                In <b>task 2</b>, you will be doing same task as task1. 
-                                Your goal is to detect <b>hate speech targeting the feminist movement</b> in the given tweets and provide annotations accordingly.
+                                In <b>task 2</b>, you will be also detecting hate speech in the given tweets and provide annotations accordingly same as task1.
                                 Please carefully read the instructions below to complete the annotations.
                             </div>
                             <div className='explainBox'>
@@ -194,14 +197,14 @@ export const Task2Page = (props) => {
                                             <div className='question'>
                                             <b>{index + 1}. Tweet: "</b><i>{data.Tweet}</i><b>"</b>
                                             </div>
-                                            <Multichoice key={index} val={answer[index][0]} setAnswer={(val) => setIthAnswer(index, 0, val)} labels={['Hate', 'Non-hate']} />
+                                            <Multichoice key={index} val={answer[index][0]} setAnswer={(val) => setIthAnswer(index, 0, val)} labels={['Hate', 'Non-hate']} id={id} tasknum={"task2"} qnum={index}/>
 
                                             {answer[index][0] === 'Non-hate' ? 
                                                 <div className='extraQuestionContainer'>
                                                     <div className='question'>
                                                         <b>{index + 1}-a.</b> Do you think the tweet belongs to the case of <b>"Advocate"</b>?
                                                     </div>
-                                                    <Multichoice val={answer[index][1]} setAnswer={(val) => setIthAnswer(index, 1, val)} labels={['Yes', 'No']} />
+                                                    <Multichoice val={answer[index][1]} setAnswer={(val) => setIthAnswer(index, 1, val)} labels={['Yes', 'No']} id={id} tasknum={"task2"} qnum={`${index}-sub`}/>
                                                 </div>
                                                 :
                                                 null

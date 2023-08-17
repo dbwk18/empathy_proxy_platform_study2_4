@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './multichoice.css'
 import { Tooltip } from '../Tooltip/Tooltip';
+import { firebaseDB } from '../../firebase';
+import { ref, set, get, push } from "firebase/database";
+
 
 
 export const Multichoice = (props) => {
@@ -17,12 +20,23 @@ export const Multichoice = (props) => {
     function isClicked (val) {
         setVal(val);
         props.setAnswer(val);
+        createLog();
     }
 
     function isHovered (e, val) {
         setHover(val);
         setXpos(e.target.offsetLeft);
         setYpos(e.target.offsetTop + 40);
+    }
+
+    async function createLog () {
+        if (props.tasknum) {
+            const dataObject = {}
+            const logRef = ref(firebaseDB, 'log/' + props.id + '/' + props.tasknum);
+
+            dataObject[props.qnum] = new Date().toISOString();
+            await push(logRef, dataObject);
+        }
     }
 
     return(
