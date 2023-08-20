@@ -52,10 +52,10 @@ export const PostSurveyPage = (props) => {
         'How insecure, discouraged, irritated, stressed, and annoyed were you?'
     ];
 
-    const [answer, setAnswer] = useState(Array(6).fill(''));
+    const [answer, setAnswer] = useState(Array(7).fill(''));
 
     function checkAllAnswered (answer) {
-        const isAllAnswer = answer.every(item => item !== '');
+        const isAllAnswer = answer[1] !== '' && answer[2] !== '' && answer[3] !== '' && answer[4] !== '' && answer[5] !== '' && answer[6] !== '';
         return isAllAnswer;
     }
 
@@ -122,7 +122,7 @@ export const PostSurveyPage = (props) => {
                 <div className='explaination'>
                         {currentPageNum === 11 ?
                             <>
-                                This is the post-survey about previous <b>Task 2</b>.
+                                This is the post-survey about previous task.
                                 We would like to gather more information about your experience with the task.
                                 Please take a moment to answer the following questions.
                             </>
@@ -134,6 +134,12 @@ export const PostSurveyPage = (props) => {
                     </div>
                     {currentPageNum === 11 ?
                         <div className='questionsContainer'>
+                            <div className='questionBox'>
+                                <div className='question'>
+                                    <b>1.</b>  (Optional) Feel free to leave any feedback regarding our survey.
+                                </div>
+                                <input className='shortform' name={0} value={answer[0]} onChange={inputHandler}/>
+                            </div>
                             {/* <div className='questionBox'>
                                 <div className='question'>
                                     <b>1.</b> If we provide the given statements of perception, cognition, and action to general people, do you think it would help people understand the value of legalization of abortion?
@@ -148,7 +154,7 @@ export const PostSurveyPage = (props) => {
                             </div>
                             <div className='questionBox'>
                                 <div className='question'>
-                                    <b>2.</b>  (Optional) Feel free to leave any feedbacks regarding our survey.
+                                    <b>2.</b>  (Optional) Feel free to leave any feedback regarding our survey.
                                 </div>
                                 <input className='shortform' name={2} value={answer[2]} onChange={inputHandler}/>
                             </div>
@@ -167,7 +173,7 @@ export const PostSurveyPage = (props) => {
                                         <div className='question'>
                                             {index+1}. {question}
                                         </div>
-                                        <Likertchoice val={answer[index]} id={index} setAnswer={(val) => setIthAnswer(index, val)} labels={['Very Low', 'Low', 'Little Low', 'Neutral', 'Little High', 'High', 'Very High']}/>
+                                        <Likertchoice val={answer[index+1]} id={index+1} setAnswer={(val) => setIthAnswer(index+1, val)} labels={['Very Low', 'Low', 'Little Low', 'Neutral', 'Little High', 'High', 'Very High']}/>
                                     </div>
                                 ))
                             }           

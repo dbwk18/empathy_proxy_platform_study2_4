@@ -180,7 +180,7 @@ export const Task1Page = (props) => {
                     : 
                         <>
                             <div className='explaination'>
-                                Please classify the following tweet as hate speech or non-hate speech to the <b>legalization of abortion</b>.
+                                Please classify the following tweet as hate speech or non-hate speech to the <b>people who support legalization of abortion</b>.
                             </div>
                             <div className='explainBox'>
                                 <b>Annotation definitions:</b>
